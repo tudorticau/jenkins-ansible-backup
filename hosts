@@ -1,0 +1,27 @@
+[linux_halleykm]
+haproxy1                        ansible_host=172.16.0.2  
+
+[windows_halleykm]
+spd                             ansible_host=172.16.5.21
+
+[vmware]
+esxi     ansible_host=172.16.5.16
+vtest    ansible_host=172.16.21.1
+
+[jenkins_zabbix]
+zabbix ansible_connection=local
+
+[test_linux]
+ambiente ansible_host=172.16.99.5
+
+[test_windows]
+dima ansible_host=172.16.5.134
+
+[linux:children]
+linux_halleykm
+jenkins_zabbix
+test_linux
+
+[windows:children]
+windows_halleykm
+test_windows

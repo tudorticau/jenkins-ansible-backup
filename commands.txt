@@ -1,0 +1,5 @@
+ansible windows -m win_shell -a "shutdown /s"
+
+ansible linux -m shell -a "shutdown"
+
+ansible vmware -m shell -a "esxcli system shutdown"

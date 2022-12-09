@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    environment {
+        HOST = 'vtest'
+    }
+    stages {
+        stage('Copy hosts file to workspace') {
+            steps {
+                sh '''
+                     sudo cp /root/jenkins_backup/hosts ${WORKSPACE}
+                     sudo cp -R /root/jenkins_backup/group_vars/ ${WORKSPACE}
+                '''
+                }
+            }
+        stage('Test connection') {
+            steps {
+                sh 'sudo ansible -i ${WORKSPACE}/hosts ${HOST} -m ping'
+                }
+            }
+        
+        
+        stage('Report') {
+            steps {
+                    echo "Server ${HOST} is powered off"
+            }
+        }
+    }
+}
